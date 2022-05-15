@@ -1,9 +1,9 @@
-import './App.css';
+import { PageLogin } from './pages'
 
 function App() {
   return (
     <div>
-      Login. Logout, Register with Firebase
+      <PageLogin />
     </div>
   );
 }
