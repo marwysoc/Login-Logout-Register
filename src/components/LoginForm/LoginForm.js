@@ -1,15 +1,46 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Box, TextField, Button, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
+
+import { Input } from '../UI'
+
+import isEmail from 'validator/lib/isEmail'
+import { useFormContext } from 'react-hook-form'
 
 import classes from './styles.module.css'
+
+import {
+  EMAIL_VALIDATION_ERROR,
+  PASSWORD_VALIDATION_ERROR,
+  PASSWORD_REQUIRED_ERROR,
+} from '../../consts'
 
 export const LoginForm = (props) => {
   const {
     sx,
+    onSubmit,
     ...otherProps
   } = props
+
+  const methods = useFormContext()
+
+  const { register, formState: { errors } } = methods
+
+  const registeredEmailProps = register('email', {
+    validate: (email) => isEmail(email) || EMAIL_VALIDATION_ERROR
+  })
+
+  const registeredPasswordProps = register('password', {
+    required: {
+      value: true,
+      message: PASSWORD_REQUIRED_ERROR
+    },
+    minLength: {
+      value: 6,
+      message: PASSWORD_VALIDATION_ERROR
+    }
+  })
 
   return (
     <Box
@@ -21,34 +52,42 @@ export const LoginForm = (props) => {
       }}
       {...otherProps}
     >
-      <Typography variant="h5" gutterBottom component="div">
-        Login
+      <Typography
+        variant="h5"
+        gutterBottom
+        component="div"
+      >
+        Log in 👋
       </Typography>
       <form
         className={`${classes.root}${props.className ? ` ${props.className}` : ''}`}
+        onSubmit={props.onSubmit}
       >
-        <TextField
-          id="login-e-mail"
-          label="E-mail"
-          variant="outlined"
+        <Input
+          label={'E-mail'}
+          variant={'outlined'}
+          errorMessage={errors.email && errors.email.message}
+          {...registeredEmailProps}
           sx={{
             width: '100%',
-            marginBottom: '10px'
+            marginBottom: '8px'
           }}
         />
-        <TextField
-          id="login-password"
-          label="Password"
-          variant="outlined"
-          type="password"
+        <Input
+          label={'Password'}
+          variant={'outlined'}
+          type={'password'}
+          errorMessage={errors.password && errors.password.message}
+          {...registeredPasswordProps}
           sx={{
             width: '100%',
-            marginBottom: '10px'
+            marginBottom: '8px'
           }}
         />
         <Button
-          variant="contained"
-          color="success"
+          variant={'contained'}
+          color={'success'}
+          type={'submit'}
           sx={{
             width: '100%',
             marginBottom: '10px',
@@ -62,7 +101,8 @@ export const LoginForm = (props) => {
 }
 
 LoginForm.propTypes = {
-  sx: PropTypes.object
+  sx: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default LoginForm

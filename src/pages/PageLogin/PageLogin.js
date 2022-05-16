@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 
 import { Box } from '@mui/material'
 
+import { useForm, FormProvider } from 'react-hook-form'
+
 import { FullPageLayout } from '../../components/Layouts'
 import { LoginForm } from '../../components'
 
@@ -10,6 +12,9 @@ export const PageLogin = (props) => {
     sx,
     ...otherProps
   } = props
+
+  const methods = useForm()
+  const { handleSubmit } = methods
 
   return (
     <Box
@@ -22,7 +27,14 @@ export const PageLogin = (props) => {
       {...otherProps}
     >
       <FullPageLayout>
-        <LoginForm />
+        <FormProvider
+          {...methods}
+        >
+          <LoginForm
+            // onSubmit={handleSubmit((data) => props.onClickLogin(data.email, data.password))}
+            onSubmit={handleSubmit((data) => console.log(data.email, data.password))}
+          />
+        </FormProvider>
       </FullPageLayout>
     </Box>
   )
