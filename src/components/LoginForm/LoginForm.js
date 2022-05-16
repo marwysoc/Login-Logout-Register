@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Box, TextField, Button } from '@mui/material'
+import { Box, TextField, Button, Typography } from '@mui/material'
 
 import classes from './styles.module.css'
 
@@ -21,6 +21,9 @@ export const LoginForm = (props) => {
       }}
       {...otherProps}
     >
+      <Typography variant="h5" gutterBottom component="div">
+        Login
+      </Typography>
       <form
         className={`${classes.root}${props.className ? ` ${props.className}` : ''}`}
       >
