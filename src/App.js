@@ -1,7 +1,7 @@
 import React from 'react'
-import { PageLogin } from './pages'
+import { PageLogin, PageRegister } from './pages'
 
-import { signIn, getUserData, checkIfUserIsLoggedIn } from './auth'
+import { signIn, signUp, getUserData, checkIfUserIsLoggedIn } from './auth'
 
 import { useAuthUser } from './contexts/UserContext'
 
@@ -40,6 +40,15 @@ function App() {
     })
   }, [handleAsyncAction, getUserDataFromApi])
 
+  const onClickRegister = React.useCallback(async (email, password) => {
+    handleAsyncAction(async () => {
+      await signUp(email, password)
+      await Promise.all([
+        getUserDataFromApi()
+      ])
+    })
+  }, [handleAsyncAction, getUserDataFromApi])
+
   React.useEffect(() => {
     handleAsyncAction(async () => {
       const userIsLoggedIn = await checkIfUserIsLoggedIn()
@@ -56,8 +65,11 @@ function App() {
     <div>
       {
         !isUserLoggedIn ?
-          <PageLogin
-            onClickLogin={onClickLogin}
+          // <PageLogin
+          //   onClickLogin={onClickLogin}
+          // />
+          <PageRegister
+            onClickRegister={onClickRegister}
           />
           :
           <h1> Welcome!</h1>
