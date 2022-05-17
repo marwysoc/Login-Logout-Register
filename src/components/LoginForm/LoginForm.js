@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, Icon } from '@mui/material'
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded'
 
 import { Input } from '../UI'
 
@@ -57,7 +58,20 @@ export const LoginForm = (props) => {
         gutterBottom
         component="div"
       >
-        Log in 👋
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+          Log in
+          <Icon
+            sx={{
+              marginLeft: '5px'
+            }}>
+            <LoginRoundedIcon />
+          </Icon>
+        </Box>
       </Typography>
       <form
         className={`${classes.root}${props.className ? ` ${props.className}` : ''}`}
