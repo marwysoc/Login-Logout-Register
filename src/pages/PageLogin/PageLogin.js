@@ -10,6 +10,7 @@ import { LoginForm } from '../../components'
 export const PageLogin = (props) => {
   const {
     sx,
+    onClickLogin,
     ...otherProps
   } = props
 
@@ -31,8 +32,7 @@ export const PageLogin = (props) => {
           {...methods}
         >
           <LoginForm
-            // onSubmit={handleSubmit((data) => props.onClickLogin(data.email, data.password))}
-            onSubmit={handleSubmit((data) => console.log(data.email, data.password))}
+            onSubmit={handleSubmit((data) => props.onClickLogin(data.email, data.password))}
           />
         </FormProvider>
       </FullPageLayout>
