@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Box, Button, Typography, Icon } from '@mui/material'
-import LoginRoundedIcon from '@mui/icons-material/LoginRounded'
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 import { Input } from '../UI'
 
@@ -83,7 +83,7 @@ export const RegisterForm = (props) => {
             sx={{
               marginLeft: '5px'
             }}>
-            <LoginRoundedIcon />
+            <PersonAddAltIcon />
           </Icon>
         </Box>
       </Typography>
@@ -113,7 +113,7 @@ export const RegisterForm = (props) => {
           }}
         />
         <Input
-          label={'Password'}
+          label={'Repeat Password'}
           variant={'outlined'}
           type={'password'}
           errorMessage={errors.repeatPassword && errors.repeatPassword.message}
@@ -125,14 +125,14 @@ export const RegisterForm = (props) => {
         />
         <Button
           variant={'contained'}
-          color={'success'}
+          color={'primary'}
           type={'submit'}
           sx={{
             width: '100%',
             marginBottom: '10px',
           }}
         >
-          LOGIN
+          REGISTER
         </Button>
       </form>
     </Box>
