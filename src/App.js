@@ -1,7 +1,7 @@
 import React from 'react'
-import { PageLogin, PageRegister } from './pages'
+import { PageLogin, PageRegister, PageResetPassword } from './pages'
 
-import { signIn, signUp, getUserData, checkIfUserIsLoggedIn } from './auth'
+import { signIn, signUp, getUserData, checkIfUserIsLoggedIn, sendPasswordResetEmail } from './auth'
 
 import { useAuthUser } from './contexts/UserContext'
 
@@ -49,6 +49,15 @@ function App() {
     })
   }, [handleAsyncAction, getUserDataFromApi])
 
+  const onClickResetPassword = React.useCallback(async (email) => {
+    handleAsyncAction(async () => {
+      await sendPasswordResetEmail(email)
+      await Promise.all([
+        getUserDataFromApi()
+      ])
+    })
+  }, [handleAsyncAction, getUserDataFromApi])
+
   React.useEffect(() => {
     handleAsyncAction(async () => {
       const userIsLoggedIn = await checkIfUserIsLoggedIn()
@@ -68,8 +77,11 @@ function App() {
           // <PageLogin
           //   onClickLogin={onClickLogin}
           // />
-          <PageRegister
-            onClickRegister={onClickRegister}
+          // <PageRegister
+          //   onClickRegister={onClickRegister}
+          // />
+          <PageResetPassword
+            onClickResetPassword={onClickResetPassword}
           />
           :
           <h1> Welcome!</h1>
