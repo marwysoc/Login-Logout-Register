@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import { PageLogin, PageRegister, PageResetPassword } from './pages'
+import { PageLogin, PageRegister, PageResetPassword, PageUserAuth } from './pages'
 
 import { signIn, signUp, getUserData, checkIfUserIsLoggedIn, sendPasswordResetEmail } from './auth'
 
@@ -104,7 +104,9 @@ function App() {
             />
           </Routes>
           :
-          <h1> Welcome {userEmail}!</h1>
+          <PageUserAuth
+            userEmail={userEmail}
+          />
       }
     </div >
   );
