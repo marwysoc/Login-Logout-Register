@@ -1,4 +1,6 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+
 import { PageLogin, PageRegister, PageResetPassword } from './pages'
 
 import { signIn, signUp, getUserData, checkIfUserIsLoggedIn, sendPasswordResetEmail } from './auth'
@@ -74,15 +76,32 @@ function App() {
     <div>
       {
         !isUserLoggedIn ?
-          // <PageLogin
-          //   onClickLogin={onClickLogin}
-          // />
-          // <PageRegister
-          //   onClickRegister={onClickRegister}
-          // />
-          <PageResetPassword
-            onClickResetPassword={onClickResetPassword}
-          />
+          <Routes>
+            <Route
+              path={'*'}
+              element={
+                <PageLogin
+                  onClickLogin={onClickLogin}
+                />
+              }
+            />
+            <Route
+              path={'/register'}
+              element={
+                <PageRegister
+                  onClickRegister={onClickRegister}
+                />
+              }
+            />
+            <Route
+              path={'/reset-password'}
+              element={
+                <PageResetPassword
+                  onClickResetPassword={onClickResetPassword}
+                />
+              }
+            />
+          </Routes>
           :
           <h1> Welcome!</h1>
       }
