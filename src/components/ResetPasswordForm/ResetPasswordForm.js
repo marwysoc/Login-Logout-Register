@@ -20,6 +20,7 @@ export const ResetPasswordForm = (props) => {
   const {
     sx,
     onSubmit,
+    onClickBackToLogin,
     ...otherProps
   } = props
 
@@ -77,7 +78,7 @@ export const ResetPasswordForm = (props) => {
           />
           <Button
             variant={'contained'}
-            color={'success'}
+            color={'secondary'}
             type={'submit'}
             sx={{
               width: '100%',
@@ -86,6 +87,17 @@ export const ResetPasswordForm = (props) => {
           >
             RESET PASSWORD
           </Button>
+          <Button
+            variant={'contained'}
+            color={'success'}
+            onClick={props.onClickBackToLogin}
+            sx={{
+              width: '100%',
+              marginBottom: '10px',
+            }}
+          >
+            BACK TO LOGIN
+          </Button>
         </form>
     </Box>
   )
@@ -93,7 +105,8 @@ export const ResetPasswordForm = (props) => {
 
 ResetPasswordForm.propTypes = {
   sx: PropTypes.object,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onClickBackToLogin: PropTypes.func.isRequired
 }
 
 export default ResetPasswordForm
