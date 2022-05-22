@@ -134,6 +134,17 @@ export const RegisterForm = (props) => {
         >
           REGISTER
         </Button>
+        <Button
+            variant={'contained'}
+            color={'success'}
+            onClick={props.onClickBackToLogin}
+            sx={{
+              width: '100%',
+              marginBottom: '10px',
+            }}
+          >
+            BACK TO LOGIN
+          </Button>
       </form>
     </Box>
   )
