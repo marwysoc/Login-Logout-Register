@@ -11,7 +11,8 @@ function App() {
   // data from UserContext
   const {
     isUserLoggedIn,
-    setUser
+    setUser,
+    userEmail
   } = useAuthUser()
 
   const handleAsyncAction = React.useCallback(async (asyncAction) => {
@@ -103,7 +104,7 @@ function App() {
             />
           </Routes>
           :
-          <h1> Welcome!</h1>
+          <h1> Welcome {userEmail}!</h1>
       }
     </div >
   );
