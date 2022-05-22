@@ -1,8 +1,10 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Box } from '@mui/material'
 
 import { useForm, FormProvider } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { FullPageLayout } from '../../components/Layouts'
 import { ResetPasswordForm } from '../../components'
@@ -16,6 +18,9 @@ export const PageResetPassword = (props) => {
 
   const methods = useForm()
   const { handleSubmit } = methods
+
+  const navigate = useNavigate()
+  const onClickBackToLogin = React.useCallback(() => navigate('/login'), [navigate])
 
   return (
     <Box
@@ -33,6 +38,7 @@ export const PageResetPassword = (props) => {
         >
           <ResetPasswordForm
             onSubmit={handleSubmit((data) => props.onClickResetPassword(data.email))}
+            onClickBackToLogin={onClickBackToLogin}
           />
         </FormProvider>
       </FullPageLayout>
