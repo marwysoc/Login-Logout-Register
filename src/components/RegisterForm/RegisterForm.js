@@ -22,6 +22,7 @@ export const RegisterForm = (props) => {
   const {
     sx,
     onSubmit,
+    onClickBackToLogin,
     ...otherProps
   } = props
 
@@ -153,7 +154,8 @@ export const RegisterForm = (props) => {
 RegisterForm.propTypes = {
   sx: PropTypes.object,
   className: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onClickBackToLogin: PropTypes.func.isRequired
 }
 
 export default RegisterForm
