@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import { PageLogin, PageRegister, PageResetPassword, PageUserAuth } from './pages'
 
-import { signIn, signUp, getUserData, checkIfUserIsLoggedIn, sendPasswordResetEmail } from './auth'
+import { signIn, signUp, getUserData, checkIfUserIsLoggedIn, sendPasswordResetEmail, logOut } from './auth'
 
 import { useAuthUser } from './contexts/UserContext'
 
@@ -12,7 +12,8 @@ function App() {
   const {
     isUserLoggedIn,
     setUser,
-    userEmail
+    userEmail,
+    clearUser
   } = useAuthUser()
 
   const handleAsyncAction = React.useCallback(async (asyncAction) => {
@@ -61,6 +62,15 @@ function App() {
     })
   }, [handleAsyncAction, getUserDataFromApi])
 
+  const onClickLogout = React.useCallback(async () => {
+    handleAsyncAction(async () => {
+      await logOut()
+      await Promise.all([
+        clearUser()
+      ])
+    })
+  }, [handleAsyncAction, clearUser])
+
   React.useEffect(() => {
     handleAsyncAction(async () => {
       const userIsLoggedIn = await checkIfUserIsLoggedIn()
@@ -106,6 +116,7 @@ function App() {
           :
           <PageUserAuth
             userEmail={userEmail}
+            onClickLogout={onClickLogout}
           />
       }
     </div >
