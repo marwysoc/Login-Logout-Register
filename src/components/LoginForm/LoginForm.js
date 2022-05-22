@@ -21,6 +21,8 @@ export const LoginForm = (props) => {
   const {
     sx,
     onSubmit,
+    onClickRegister,
+    onClickResetPassword,
     ...otherProps
   } = props
 
@@ -109,6 +111,28 @@ export const LoginForm = (props) => {
         >
           LOGIN
         </Button>
+        <Button
+          variant={'contained'}
+          color={'primary'}
+          onClick={props.onClickRegister}
+          sx={{
+            width: '100%',
+            marginBottom: '10px',
+          }}
+        >
+          REGISTER
+        </Button>
+        <Button
+          variant={'contained'}
+          color={'secondary'}
+          onClick={props.onClickResetPassword}
+          sx={{
+            width: '100%',
+            marginBottom: '10px',
+          }}
+        >
+          RESET PASSWORD
+        </Button>
       </form>
     </Box>
   )
@@ -116,7 +140,9 @@ export const LoginForm = (props) => {
 
 LoginForm.propTypes = {
   sx: PropTypes.object,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onClickRegister: PropTypes.func.isRequired,
+  onClickResetPassword: PropTypes.func.isRequired
 }
 
 export default LoginForm
